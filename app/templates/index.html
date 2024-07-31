@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Find my device</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Find My Device</h1>
+      </header>
+      <main>
+        <form method="post">
+          <div class="form-group">
+            <label for="company">Select Company:</label>
+            <select name="company" id="company">
+              <option value="elatec_gmbh" {% if selected_company == 'elatec_gmbh' %}selected{% endif %}>Elatec GmbH</option>
+              <option value="sesamsec_gmbh" {% if selected_company == 'sesamsec_gmbh' %}selected{% endif %}>Sesamsec GmbH</option>
+              <option value="elatec_system_gmbh" {% if selected_company == 'elatec_system_gmbh' %}selected{% endif %}>Elatec System GmbH</option>
+              <option value="elatec_inc" {% if selected_company == 'elatec_inc' %}selected{% endif %}>Elatec Inc.</option>
+            </select>
+            <br>
+            <label for="serial_number">Enter Serial Number:</label>
+            <input type="text" id="serial_number" name="serial_number" value="{{ serial_number }}" required>
+          </div>
+          <button type="submit" class="btn">Search</button>
+        </form>
+
+        {% if data %}
+          <table>
+            <tr><th>SN:</th><td>{{ data['SN'] }}</td></tr>
+            <tr><th>P/N:</th><td>{{ data['P/N'] }}</td></tr>
+            <tr><th>Description:</th><td>{{ data['desc'] }}</td></tr>
+            <tr><th>Description 2:</th><td>{{ data['desc2'] }}</td></tr>
+            <tr><th>Warranty:</th><td>{{ data['Warranty'] }}</td></tr>
+            <tr><th>Warranty period until:</th><td>{{ data['Warranty period until'] }}</td></tr>
+          </table>
+        {% endif %}
+      </main>
+    </div>
+  </body>
+</html>
